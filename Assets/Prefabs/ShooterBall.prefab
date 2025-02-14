@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -5069572229768129262}
   m_Layer: 0
   m_Name: ShooterBall
-  m_TagString: Untagged
+  m_TagString: ShooterBall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootForce: 15
+  ballLifetime: 5
   shooterBallPrefab: {fileID: 4116660639107252456}
   ballColors:
   - {r: 1, g: 0, b: 0, a: 1}

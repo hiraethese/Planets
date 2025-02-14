@@ -30,6 +30,7 @@ public class PlanetGenerator : MonoBehaviour
                 Color selectedColor = ballColors[Random.Range(0, ballColors.Length)];
                 newMaterial.SetColor("_BaseColor", selectedColor);
                 ballRenderer.material = newMaterial;
+                newBall.AddComponent<PlanetBall>().SetColor(selectedColor);
             }
 
             Rigidbody ballRigidbody = newBall.GetComponent<Rigidbody>();
