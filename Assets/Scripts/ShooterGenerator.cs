@@ -11,6 +11,7 @@ public class ShooterGenerator : MonoBehaviour
     private bool canRespawn = true;
     private float timer = 0f;
     private Vector3 initialPosition;
+    private Color ballColor;
 
     void Start()
     {
@@ -55,6 +56,7 @@ public class ShooterGenerator : MonoBehaviour
             Color selectedColor = ballColors[Random.Range(0, ballColors.Length)];
             newMaterial.SetColor("_BaseColor", selectedColor);
             ballRenderer.material = newMaterial;
+            ballColor = selectedColor;
         }
 
         timer = 0f;
@@ -95,5 +97,10 @@ public class ShooterGenerator : MonoBehaviour
         Destroy(gameObject, 0.1f);
 
         Instantiate(shooterBallPrefab, initialPosition, Quaternion.identity);
+    }
+
+    public Color GetShooterColor()
+    {
+        return ballColor;
     }
 }

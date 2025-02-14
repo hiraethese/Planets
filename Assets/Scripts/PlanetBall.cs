@@ -13,11 +13,11 @@ public class PlanetBall : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("ShooterBall"))
         {
-            Renderer shooterRenderer = collision.gameObject.GetComponent<Renderer>();
+            ShooterGenerator shooter = collision.gameObject.GetComponent<ShooterGenerator>();
 
-            if (shooterRenderer != null)
+            if (shooter != null)
             {
-                Color shooterColor = shooterRenderer.material.GetColor("_BaseColor");
+                Color shooterColor = shooter.GetShooterColor();
 
                 if (shooterColor == ballColor)
                 {
