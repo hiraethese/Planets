@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3488905861716285120}
   - component: {fileID: 4560726996792755806}
   - component: {fileID: 6446125708149876309}
-  - component: {fileID: 6612189715912418707}
+  - component: {fileID: -5069572229768129262}
   m_Layer: 0
   m_Name: ShooterBall
   m_TagString: Untagged
@@ -106,7 +106,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6612189715912418707
+--- !u!114 &-5069572229768129262
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,3 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5805e1bc3bc311e9833c5132ba21021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballColors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
