@@ -3,24 +3,34 @@ using UnityEngine;
 public class ShooterGenerator : MonoBehaviour
 {
     public float shootForce = 15f;
+    public GameObject shooterBallPrefab;
     public Color[] ballColors = new Color[] {Color.red, Color.green, Color.blue};
     private Rigidbody rb;
     private bool isShot = false;
+    private bool canRespawn = true;
+    private Vector3 initialPosition;
 
     void Start()
     {
-        InitializeShooterBall();
+        initialPosition = transform.position;
+        InitializeBall();
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !isShot)
         {
             ShootBall();
         }
+
+        if (transform.position.y < -20f && canRespawn)
+        {
+            canRespawn = false;
+            RespawnBall();
+        }
     }
 
-    void InitializeShooterBall()
+    void InitializeBall()
     {
         rb = GetComponent<Rigidbody>();
         if (rb == null)
@@ -68,5 +78,12 @@ public class ShooterGenerator : MonoBehaviour
         }
 
         rb.AddForce(shootDirection * shootForce, ForceMode.Impulse);
+    }
+
+    void RespawnBall()
+    {
+        Destroy(gameObject, 0.1f);
+
+        Instantiate(shooterBallPrefab, initialPosition, Quaternion.identity);
     }
 }

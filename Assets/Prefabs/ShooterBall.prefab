@@ -118,6 +118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5805e1bc3bc311e9833c5132ba21021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootForce: 15
+  shooterBallPrefab: {fileID: 4116660639107252456}
   ballColors:
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 0, g: 1, b: 0, a: 1}
