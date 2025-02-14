@@ -3,11 +3,13 @@ using UnityEngine;
 public class ShooterGenerator : MonoBehaviour
 {
     public float shootForce = 15f;
+    public float ballLifetime = 5f;
     public GameObject shooterBallPrefab;
     public Color[] ballColors = new Color[] {Color.red, Color.green, Color.blue};
     private Rigidbody rb;
     private bool isShot = false;
     private bool canRespawn = true;
+    private float timer = 0f;
     private Vector3 initialPosition;
 
     void Start()
@@ -23,7 +25,12 @@ public class ShooterGenerator : MonoBehaviour
             ShootBall();
         }
 
-        if (transform.position.y < -20f && canRespawn)
+        if (isShot)
+        {
+            timer += Time.deltaTime;
+        }
+
+        if ( (transform.position.y < -20f || timer >= ballLifetime) && canRespawn )
         {
             canRespawn = false;
             RespawnBall();
@@ -49,6 +56,9 @@ public class ShooterGenerator : MonoBehaviour
             newMaterial.SetColor("_BaseColor", selectedColor);
             ballRenderer.material = newMaterial;
         }
+
+        timer = 0f;
+        canRespawn = true;
     }
 
     void ShootBall()
