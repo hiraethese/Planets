@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlanetGenerator : MonoBehaviour
 {
     public GameObject planetBallPrefab;
+    public float rotationSpeed = 10f;
     public int numberOfPlanetBalls = 100;
     public Color[] ballColors = new Color[] {Color.red, Color.green, Color.blue};
     private List<GameObject> planetBalls = new List<GameObject>();
@@ -11,6 +12,11 @@ public class PlanetGenerator : MonoBehaviour
     void Start()
     {
         GenerateBallsOnPlanet();
+    }
+
+    void Update()
+    {
+        RotatePlanet();
     }
 
     void GenerateBallsOnPlanet()
@@ -42,5 +48,10 @@ public class PlanetGenerator : MonoBehaviour
 
             planetBalls.Add(newBall);
         }
+    }
+
+    void RotatePlanet()
+    {
+        transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
     }
 }
