@@ -94,6 +94,11 @@ public class ShooterGenerator : MonoBehaviour
 
     void RespawnBall()
     {
+        if (ShooterCounter.Instance != null)
+        {
+            ShooterCounter.Instance.DecreaseBallCount();
+        }
+
         Destroy(gameObject, 0.1f);
 
         Instantiate(shooterBallPrefab, initialPosition, Quaternion.identity);
