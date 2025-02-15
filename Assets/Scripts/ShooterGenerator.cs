@@ -164,7 +164,7 @@ public class ShooterGenerator : MonoBehaviour
 
         Destroy(gameObject, 0.1f);
 
-        if (ShooterCounter.Instance.GameEnd())
+        if (ShooterCounter.Instance.IsGameEnd())
         {
             return;
         }

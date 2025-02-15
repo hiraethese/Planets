@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ShooterCounter : MonoBehaviour
 {
@@ -40,7 +41,7 @@ public class ShooterCounter : MonoBehaviour
         }
     }
 
-    public bool GameEnd()
+    public bool IsGameEnd()
     {
         return _currentBallCount <= 0;
     }
@@ -51,5 +52,10 @@ public class ShooterCounter : MonoBehaviour
         {
             ballCountText.text = "Balls: " + _currentBallCount;
         }
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
