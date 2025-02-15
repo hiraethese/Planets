@@ -1,10 +1,12 @@
+using System;
 using UnityEngine;
 
 public class PlanetBall : MonoBehaviour
 {
+    public AudioSource audioSource;
     public AudioClip hitSoundClip;
-    private AudioSource audioSource;
     private Color ballColor;
+    private bool isTouched = false;
 
     public void SetColor(Color color)
     {
@@ -13,25 +15,25 @@ public class PlanetBall : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("ShooterBall"))
+        if (!collision.gameObject.CompareTag("ShooterBall") || isTouched)
         {
-            ShooterGenerator shooter = collision.gameObject.GetComponent<ShooterGenerator>();
+            return;
+        }
 
-            if (shooter == null)
-            {
-                return;
-            }
+        ShooterGenerator shooter = collision.gameObject.GetComponent<ShooterGenerator>();
 
-            Color shooterColor = shooter.GetShooterColor();
+        if (shooter == null)
+        {
+            return;
+        }
 
-            if (shooterColor == ballColor)
-            {
-                audioSource = GetComponent<AudioSource>();
-                audioSource.enabled = true;
-                audioSource.clip = hitSoundClip;
-                audioSource.Play();
-                Destroy(gameObject);
-            }
+        Color shooterColor = shooter.GetShooterColor();
+
+        if (shooterColor == ballColor)
+        {
+            isTouched = true;
+
+            Destroy(gameObject, hitSoundClip?.length ?? 0);
         }
     }
 }
