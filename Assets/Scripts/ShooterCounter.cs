@@ -42,7 +42,7 @@ public class ShooterCounter : MonoBehaviour
 
     public bool GameEnd()
     {
-        return currentBallCount == 0;
+        return currentBallCount <= 0;
     }
 
     private void UpdateUI()

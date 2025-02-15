@@ -164,6 +164,11 @@ public class ShooterGenerator : MonoBehaviour
 
         Destroy(gameObject, 0.1f);
 
+        if (ShooterCounter.Instance.GameEnd())
+        {
+            return;
+        }
+
         Instantiate(shooterBallPrefab, initialPosition, Quaternion.identity);
     }
 
