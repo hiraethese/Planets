@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlanetBall : MonoBehaviour
 {
     private Color _ballColor;
+    private bool _isDestroyed = false;
 
     public void SetColor(Color color)
     {
@@ -11,7 +12,7 @@ public class PlanetBall : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!collision.gameObject.CompareTag("ShooterBall"))
+        if (!collision.gameObject.CompareTag("ShooterBall") || _isDestroyed)
         {
             return;
         }
@@ -27,7 +28,10 @@ public class PlanetBall : MonoBehaviour
 
         if (shooterColor == _ballColor)
         {
+            _isDestroyed = true;
+
             SoundManager.PlayDefaultClip();
+            ShooterCounter.Instance.IncreaseGameScore();
 
             Destroy(gameObject);
         }
