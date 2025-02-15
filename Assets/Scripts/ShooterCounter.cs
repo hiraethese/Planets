@@ -6,7 +6,7 @@ public class ShooterCounter : MonoBehaviour
     public static ShooterCounter Instance;
     public TextMeshProUGUI ballCountText;
     public int maxShooterBalls = 50;
-    private int currentBallCount;
+    private int _currentBallCount;
 
     void Awake()
     {
@@ -27,29 +27,29 @@ public class ShooterCounter : MonoBehaviour
 
     public void SetToMax()
     {
-        currentBallCount = maxShooterBalls;
+        _currentBallCount = maxShooterBalls;
         UpdateUI();
     }
 
     public void DecreaseBallCount()
     {
-        if (currentBallCount > 0)
+        if (_currentBallCount > 0)
         {
-            currentBallCount--;
+            _currentBallCount--;
             UpdateUI();
         }
     }
 
     public bool GameEnd()
     {
-        return currentBallCount <= 0;
+        return _currentBallCount <= 0;
     }
 
     private void UpdateUI()
     {
         if (ballCountText != null)
         {
-            ballCountText.text = "Balls: " + currentBallCount;
+            ballCountText.text = "Balls: " + _currentBallCount;
         }
     }
 }

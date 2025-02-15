@@ -10,23 +10,23 @@ public class ShooterGenerator : MonoBehaviour
     public LineRenderer trajectoryLine;
     public int trajectoryPoints = 20;
     public float timeStep = 0.1f;
-    private Rigidbody rb;
-    private bool isShot = false;
-    private bool canRespawn = true;
-    private float timer = 0f;
-    private Vector3 initialPosition;
-    private Color ballColor;
+    private Rigidbody _rb;
+    private bool _isShot = false;
+    private bool _canRespawn = true;
+    private float _timer = 0f;
+    private Vector3 _initialPosition;
+    private Color _ballColor;
 
     void Start()
     {
-        initialPosition = transform.position;
+        _initialPosition = transform.position;
         InitializeBall();
         trajectoryLine.enabled = false;
     }
 
     void Update()
     {
-        if (!isShot)
+        if (!_isShot)
         {
             if (Input.GetMouseButton(0))
             {
@@ -39,28 +39,28 @@ public class ShooterGenerator : MonoBehaviour
             }
         }
 
-        if (isShot)
+        if (_isShot)
         {
-            timer += Time.deltaTime;
+            _timer += Time.deltaTime;
         }
 
-        if ( (transform.position.y < -20f || timer >= ballLifetime) && canRespawn )
+        if ( (transform.position.y < -20f || _timer >= ballLifetime) && _canRespawn )
         {
-            canRespawn = false;
+            _canRespawn = false;
             RespawnBall();
         }
     }
 
     void InitializeBall()
     {
-        rb = GetComponent<Rigidbody>();
-        if (rb == null)
+        _rb = GetComponent<Rigidbody>();
+        if (_rb == null)
         {
-            rb = gameObject.AddComponent<Rigidbody>();
+            _rb = gameObject.AddComponent<Rigidbody>();
         }
 
-        rb.useGravity = false;
-        rb.isKinematic = true;
+        _rb.useGravity = false;
+        _rb.isKinematic = true;
 
         Renderer ballRenderer = GetComponent<Renderer>();
         if (ballRenderer != null && ballColors.Length > 0)
@@ -69,24 +69,24 @@ public class ShooterGenerator : MonoBehaviour
             Color selectedColor = ballColors[Random.Range(0, ballColors.Length)];
             newMaterial.SetColor("_BaseColor", selectedColor);
             ballRenderer.material = newMaterial;
-            ballColor = selectedColor;
+            _ballColor = selectedColor;
         }
 
-        timer = 0f;
-        canRespawn = true;
+        _timer = 0f;
+        _canRespawn = true;
     }
 
     void ShootBall()
     {
-        if (rb == null || isShot)
+        if (_rb == null || _isShot)
         {
             return;
         }
 
-        isShot = true;
+        _isShot = true;
 
-        rb.isKinematic = false;
-        rb.useGravity = true;
+        _rb.isKinematic = false;
+        _rb.useGravity = true;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -102,7 +102,7 @@ public class ShooterGenerator : MonoBehaviour
             shootDirection = Camera.main.transform.forward;
         }
 
-        rb.AddForce(shootDirection * shootForce, ForceMode.Impulse);
+        _rb.AddForce(shootDirection * shootForce, ForceMode.Impulse);
     }
 
     void DrawTrajectory()
@@ -169,11 +169,11 @@ public class ShooterGenerator : MonoBehaviour
             return;
         }
 
-        Instantiate(shooterBallPrefab, initialPosition, Quaternion.identity);
+        Instantiate(shooterBallPrefab, _initialPosition, Quaternion.identity);
     }
 
     public Color GetShooterColor()
     {
-        return ballColor;
+        return _ballColor;
     }
 }

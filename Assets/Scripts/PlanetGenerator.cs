@@ -7,7 +7,7 @@ public class PlanetGenerator : MonoBehaviour
     public float rotationSpeed = 10f;
     public int numberOfPlanetBalls = 100;
     public Color[] ballColors = new Color[] {Color.red, Color.green, Color.blue};
-    private List<GameObject> planetBalls = new List<GameObject>();
+    private List<GameObject> _planetBalls = new List<GameObject>();
 
     void Start()
     {
@@ -46,7 +46,7 @@ public class PlanetGenerator : MonoBehaviour
             }
             ballRigidbody.isKinematic = true;
 
-            planetBalls.Add(newBall);
+            _planetBalls.Add(newBall);
         }
     }
 

@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class PlanetBall : MonoBehaviour
 {
-    private Color ballColor;
+    private Color _ballColor;
 
     public void SetColor(Color color)
     {
-        ballColor = color;
+        _ballColor = color;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -25,7 +25,7 @@ public class PlanetBall : MonoBehaviour
 
         Color shooterColor = shooter.GetShooterColor();
 
-        if (shooterColor == ballColor)
+        if (shooterColor == _ballColor)
         {
             SoundManager.PlayDefaultClip();
 
