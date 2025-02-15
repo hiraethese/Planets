@@ -27,7 +27,7 @@ public class PlanetBall : MonoBehaviour
 
         if (shooterColor == ballColor)
         {
-            SoundManager.Play();
+            SoundManager.PlayDefaultClip();
 
             Destroy(gameObject);
         }

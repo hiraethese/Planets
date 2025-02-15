@@ -1,12 +1,10 @@
 using UnityEngine;
-using System;
 
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
     public AudioSource audioSource;
     public AudioClip defaultClip;
-    public static event Action<AudioClip> OnPlaySound;
 
     private void Awake()
     {
@@ -21,34 +19,10 @@ public class SoundManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
-
-        if (audioSource == null)
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
-
-        OnPlaySound += PlaySound;
     }
 
-    private void PlaySound(AudioClip clip)
+    public static void PlayDefaultClip()
     {
-        if (clip != null)
-        {
-            audioSource.PlayOneShot(clip);
-        }
-        else if (defaultClip != null)
-        {
-            audioSource.PlayOneShot(defaultClip);
-        }
-    }
-
-    public static void Play(AudioClip clip = null)
-    {
-        OnPlaySound?.Invoke(clip);
-    }
-
-    public static void PlayDefault()
-    {
-        Play(null);
+        Instance.audioSource.PlayOneShot(Instance.defaultClip);
     }
 }
