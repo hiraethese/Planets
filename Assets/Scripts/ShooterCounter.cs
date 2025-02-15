@@ -6,6 +6,7 @@ public class ShooterCounter : MonoBehaviour
 {
     public static ShooterCounter Instance;
     public TextMeshProUGUI ballCountText;
+    public GameObject gameOverScreen;
     public int maxShooterBalls = 50;
     private int _currentBallCount;
 
@@ -39,6 +40,11 @@ public class ShooterCounter : MonoBehaviour
             _currentBallCount--;
             UpdateUI();
         }
+    }
+
+    public void GameOver()
+    {
+        gameOverScreen.SetActive(true);
     }
 
     public bool IsGameEnd()

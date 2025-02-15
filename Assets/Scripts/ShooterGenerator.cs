@@ -166,6 +166,7 @@ public class ShooterGenerator : MonoBehaviour
 
         if (ShooterCounter.Instance.IsGameEnd())
         {
+            ShooterCounter.Instance.GameOver();
             return;
         }
 
