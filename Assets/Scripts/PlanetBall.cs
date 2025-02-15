@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlanetBall : MonoBehaviour
 {
+    public AudioClip hitSoundClip;
+    private AudioSource audioSource;
     private Color ballColor;
 
     public void SetColor(Color color)
@@ -15,14 +17,20 @@ public class PlanetBall : MonoBehaviour
         {
             ShooterGenerator shooter = collision.gameObject.GetComponent<ShooterGenerator>();
 
-            if (shooter != null)
+            if (shooter == null)
             {
-                Color shooterColor = shooter.GetShooterColor();
+                return;
+            }
 
-                if (shooterColor == ballColor)
-                {
-                    Destroy(gameObject);
-                }
+            Color shooterColor = shooter.GetShooterColor();
+
+            if (shooterColor == ballColor)
+            {
+                audioSource = GetComponent<AudioSource>();
+                audioSource.enabled = true;
+                audioSource.clip = hitSoundClip;
+                audioSource.Play();
+                Destroy(gameObject);
             }
         }
     }
